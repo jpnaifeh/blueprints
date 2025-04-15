@@ -20,11 +20,11 @@ variables:
 triggers:
   - trigger: conversation
     command:
-      - "{{ tv_friendly_name }} On"
+      - "{tv_friendly_name} On"
     id: "on"
   - trigger: conversation
     command:
-      - "{{ tv_friendly_name }} Off"
+      - "{tv_friendly_name} Off"
     id: "off"
 conditions: []
 actions:
