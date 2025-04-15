@@ -16,15 +16,15 @@ mode: queued
 max_exceeded: silent
 variables:
   tv_entity: !input tv_entity
-  tv_friendly_name: "{{ state_attr('tv_entity', 'friendly_name') }}"
+  tv_friendly_name: "{{ state_attr(tv_entity, 'friendly_name') }}"
 triggers:
   - trigger: conversation
     command:
-      - "tv_friendly_name On"
+      - "{{ tv_friendly_name }} on"
     id: "on"
   - trigger: conversation
     command:
-      - "tv_friendly_name Off"
+      - "{{ tv_friendly_name }} off"
     id: "off"
 conditions: []
 actions:
