@@ -1,0 +1,49 @@
+blueprint:
+  name: TV Voice Assistant Sentences
+  description: Control TVs with Voice Assistants
+  domain: automation
+  author: J.P. Naifeh
+  input:
+    tv_entity:
+      name: TV
+      selector:
+        entity:
+          filter:
+            domain:
+            - media_player
+          multiple: false
+mode: queued
+max_exceeded: silent
+variables:
+  tv_entity: !input tv_entity
+  tv_friendly_name: {{ state_attr({{tv_entity}}, 'friendly_name') }}
+triggers:
+  - trigger: conversation
+    command:
+      - {{ tv_friendly_name }} On
+    id: "on"
+  - trigger: conversation
+    command:
+      - {{ tv_friendly_name }} Off
+    id: "off"
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id:
+              - "on"
+        sequence:
+          - data: {}
+            target:
+              entity_id: !input tv_entity
+            action: media_player.turn_on
+      - conditions:
+          - condition: trigger
+            id:
+              - "off"
+        sequence:
+          - data: {}
+            target:
+              entity_id: !input tv_entity
+            action: media_player.turn_off
