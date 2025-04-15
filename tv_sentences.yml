@@ -26,6 +26,10 @@ triggers:
     command:
       - "{{ tv_friendly_name }} off"
     id: "off"
+  - trigger: conversation
+    command: 
+      - "{{ tv_friendly_name }}"
+    id: "toggle"
 conditions: []
 actions:
   - choose:
@@ -47,3 +51,22 @@ actions:
             target:
               entity_id: !input tv_entity
             action: media_player.turn_off
+      - conditions:
+          - condition: trigger
+            id:
+              - "toggle"
+        sequence:
+          - if:
+              - condition: state
+                entity_id: !input tv_entity
+                state: "on"
+            then:
+              - target:
+                  entity_id: !input tv_entity
+                data: {}
+                action: media_player.turn_off
+            else:
+              - target:
+                  entity_id: !input tv_entity
+                data: {}
+                action: media_player.turn_on
