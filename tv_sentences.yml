@@ -35,26 +35,21 @@ actions:
   - choose:
       - conditions:
           - condition: trigger
-            id:
-              - "on"
+            id: "on"
         sequence:
-          - data: {}
+          - action: media_player.turn_on
             target:
               entity_id: !input tv_entity
-            action: media_player.turn_on
       - conditions:
           - condition: trigger
-            id:
-              - "off"
+            id: "off"
         sequence:
-          - data: {}
+          - action: media_player.turn_off
             target:
               entity_id: !input tv_entity
-            action: media_player.turn_off
       - conditions:
           - condition: trigger
-            id:
-              - "toggle"
+            id: "toggle"
         sequence:
           - if:
               - condition: state
