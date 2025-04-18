@@ -15,8 +15,8 @@ blueprint:
 mode: queued
 max_exceeded: silent
 variables:
-  tv_entity: !input tv_entity
-  tv_friendly_name: "{{ state_attr('!input tv_entity', 'friendly_name') }}"
+  #tv_entity: !input tv_entity
+  tv_friendly_name: "{{ state_attr(!input tv_entity, 'friendly_name') }}"
 triggers:
   - trigger: conversation
     command:
