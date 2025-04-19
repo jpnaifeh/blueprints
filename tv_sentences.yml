@@ -26,10 +26,10 @@ triggers:
     command:
       - "{{ tv_friendly_name }} off"
     id: "off"
-  #- trigger: conversation
-  #  command: 
-  #    - "{{ tv_friendly_name }}"
-  #  id: "toggle"
+  - trigger: conversation
+    command: 
+      - "{{ tv_entity_id }}"
+    id: "toggle"
 conditions: []
 actions:
   - choose:
